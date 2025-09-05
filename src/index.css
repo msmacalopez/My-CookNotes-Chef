@@ -53,6 +53,7 @@ main {
   border-radius: 5px;
   color: white;
   min-width: 130px;
+  cursor: pointer;
   /* min width so it doesn't wrap  */
 }
 /* .add-ingre-form > button::before {
@@ -73,10 +74,30 @@ main {
 .get-recipe-container > button {
   min-width: 100px;
   max-width: 200px;
+  min-height: 60px;
   height: 30px;
   flex-grow: 1;
   background: white;
+  font-size: 1.2rem;
   font-weight: bold;
   border: none;
   border-radius: 10px;
+
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+.get-recipe-container > button:active {
+  /* pressed look */
+  transform: translateY(2px); /* moves button slightly down */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); /* smaller shadow */
+}
+
+.formatting-recipe {
+  background-color: rgba(133, 220, 241, 0.664);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+
+  overflow-wrap: break-word;
+  min-width: 300px;
 }

@@ -1,23 +1,27 @@
 import React from "react";
 import CookNotes from "./CookNotes";
 import IngredientList from "./IngredientList";
+import { getRecipeFromMistral } from "./ai.js";
 
 const Main = () => {
   // Starting State Array
   const [ingredientsArray, setIngredientsArray] = React.useState([
-    "tomato",
-    "corn",
-    "cucumber",
-    "salt",
+    // "tomato",
+    // "corn",
+    // "cucumber",
+    // "salt",
   ]);
   //replace: const ingredientes = ["Chicken", "Oregano", "Tomatoes"];
 
   //Boolean for data fetch
-  const [recipeShown, setRecipeShown] = React.useState(false);
+  const [recipeShown, setRecipeShown] = React.useState("");
 
   //Once Click the "Get Recipe" BTN, set state to TRUE
-  function getRecipeShown() {
-    setRecipeShown((prevShown) => !prevShown);
+  async function getRecipe() {
+    //call the API, pass the ingredients from the state variable
+    const recipeMarkdown = await getRecipeFromMistral(ingredientsArray);
+    console.log(recipeMarkdown);
+    setRecipeShown(recipeMarkdown);
   }
 
   // //transforming the list in a jsx object
@@ -49,12 +53,12 @@ const Main = () => {
       {ingredientsArray.length > 0 ? (
         <IngredientList
           ingredientsArray={ingredientsArray}
-          getRecipeShown={getRecipeShown}
+          getRecipe={getRecipe}
         />
       ) : null}
 
       {
-        recipeShown && <CookNotes />
+        recipeShown && <CookNotes recipeShown={recipeShown} />
         // return AI
       }
     </main>
