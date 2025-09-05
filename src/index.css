@@ -28,6 +28,9 @@ main {
   margin: auto;
 
   padding: 50px;
+
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 800;
 }
 .add-ingre-form {
   display: flex;
@@ -56,3 +59,24 @@ main {
   content: "+";
   margin-right: 5px;
 } */
+.get-recipe-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(173, 128, 173, 0.514);
+  padding: 20px;
+  border-radius: 10px;
+  gap: 50px;
+  min-width: 300px;
+}
+.get-recipe-container > button {
+  min-width: 100px;
+  max-width: 200px;
+  height: 30px;
+  flex-grow: 1;
+  background: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+}

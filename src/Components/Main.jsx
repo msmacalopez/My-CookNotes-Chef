@@ -1,25 +1,36 @@
 import React from "react";
+import CookNotes from "./CookNotes";
+import IngredientList from "./IngredientList";
 
 const Main = () => {
-  //fx for the onClick-->not used
-  // const handleClick = () => {
-  //   console.log("Iclicked");
-  // };
+  // Starting State Array
+  const [ingredientsArray, setIngredientsArray] = React.useState([
+    "tomato",
+    "corn",
+    "cucumber",
+    "salt",
+  ]);
+  //replace: const ingredientes = ["Chicken", "Oregano", "Tomatoes"];
 
-  const [ingredientsArray, setIngredientesArray] = React.useState([]);
-  // const ingredientes = ["Chicken", "Oregano", "Tomatoes"];
+  //Boolean for data fetch
+  const [recipeShown, setRecipeShown] = React.useState(false);
 
-  //transforming the list in a jsx object
-  const li_ingredients = ingredientsArray.map((item) => (
-    <li key={item}>{item}</li>
-  ));
+  //Once Click the "Get Recipe" BTN, set state to TRUE
+  function getRecipeShown() {
+    setRecipeShown((prevShown) => !prevShown);
+  }
+
+  // //transforming the list in a jsx object
+  // const li_ingredients = ingredientsArray.map((item) => (
+  //   <li key={item}>{item}</li>
+  // ));
 
   function sendIngredient(formData) {
-    //GET new THE INGREDIENT BY NAME attribute in INPUT (form)
+    //GET new ingredient by NAME attribute in INPUT (form)
     const newIngredient = formData.get("name_ingredient");
-    // console.log(newIngredient);-->shows the just entered ingredient
-
-    setIngredientesArray((prevArray) => [...prevArray, newIngredient]);
+    // console.log(newIngredient); ->just entered
+    if (!ingredientsArray.includes(newIngredient) && newIngredient.length > 2)
+      setIngredientsArray((prevArray) => [...prevArray, newIngredient]);
   }
 
   return (
@@ -33,7 +44,19 @@ const Main = () => {
         />
         <button>+ Add Ingredient</button>
       </form>
-      <ul>{li_ingredients}</ul>
+
+      {/* //Only render this section when there is items in the List  */}
+      {ingredientsArray.length > 0 ? (
+        <IngredientList
+          ingredientsArray={ingredientsArray}
+          getRecipeShown={getRecipeShown}
+        />
+      ) : null}
+
+      {
+        recipeShown && <CookNotes />
+        // return AI
+      }
     </main>
   );
 };
